@@ -1,0 +1,45 @@
+:root {
+    --background-color-light: #fff;
+    --text-color-light: #333;
+    --background-color-dark: #333;
+    --text-color-dark: #fff;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav {
+    background: #008577;
+    color: white;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+#content {
+    margin-top: 50px;
+    padding: 20px;
+}
+
+.dark-theme {
+    --background-color-light: #333;
+    --text-color-light: #fff;
+}
+
