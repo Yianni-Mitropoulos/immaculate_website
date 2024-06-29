@@ -6,6 +6,7 @@
 }
 
 body {
+    margin: 0;
     font-family: Arial, sans-serif;
     background-color: var(--background-color-light);
     color: var(--text-color-light);
@@ -15,26 +16,37 @@ body {
 nav {
     background: #008577;
     color: white;
-    padding: 10px;
+    padding: 0;
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
+    display: flex;
+    align-items: stretch; /* Ensures buttons use full vertical space */
 }
 
 nav ul {
     list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
-    justify-content: space-around;
+    height: 100%;
+}
+
+nav li {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    padding: 10px 20px;
 }
 
 nav a {
     color: white;
     text-decoration: none;
+    display: block; /* Ensures the link uses the full height of the li */
 }
 
 #content {
-    margin-top: 50px;
+    margin-top: 15px;
     padding: 20px;
 }
 
@@ -43,3 +55,15 @@ nav a {
     --text-color-light: #fff;
 }
 
+.sub-menu {
+    display: none; /* Initially hide the sub-menu */
+    background: #007060;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+}
+
+nav li:hover .sub-menu {
+    display: block; /* Show sub-menu on hover */
+}
