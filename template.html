@@ -22,33 +22,27 @@
         <!-- Overview -->
         <h2>Overview</h2>
         <p>
-            Immaculate is a stack-oriented imperative programming in which all types appear immutable from the standpoint of the developer and end-user. Reference counting is used to prevent memory leaks by ensuring that unused memory is reclaimed; additionally, when the reference count of an object drops to exactly 1, that object is regarded as mutable `under the hood', allowing otherwise costly operations to be implemented more cheaply.
+            Immaculate is a stack-oriented imperative programming in which all types appear immutable from the standpoint of the developer and end-user. Reference counting is used to prevent memory leaks by ensuring that unused memory is reclaimed; additionally, when the reference count of an object drops to exactly 1, that object is regarded as mutable 'under the hood', allowing otherwise costly operations to be implemented more cheaply.
         </p>
         <p>
-            The language is strongly and statically-typed; this helps catch bugs early, to promote fast execution, and to assist with code analysis. It is also JIT-compiled; this helps to facilitate code use and reuse without the significant runtime cost of a fully interpreted architecture.
+            The language is strongly and statically-typed; this helps catch bugs early, to promote fast execution, and to assist with code analysis. It is also JIT-compiled; this helps to facilitate code use and reuse without the significant runtime cost of a fully interpreted architecture. Additionally, note that I/O in Immaculate is tightly controlled and fully encapsulated. The I/O calls a function is able to make are completely tracked within its type signature, and these calls always work by sending one or more requests to the parent context, which is free to handle these requests however it pleases. Like most of the features that make Immaculate special, this promotes code reuse and analysis, helps the builder produce more efficient and optimized code than would otherwise be possible, and supports secure programming practices.
+        </p>
+        <p>            
+            Furthermore, I/O is the only way to get information out of non-terminating computatons in Immaculate. This means that all non-terminating pure functions in Immaculate are essentially the same, since they simply keep running unproductively until the executing context is paused or deallocated. Note that this is contrary to the current design of the Haskell programming language, in which monads and laziness allow non-terminating pure functions to nevertheless emit data that can be seen by the outside world. This design decision is based partly on a healthy respect for the principle of least astonishment, and partly on a desire for the category of Immaculate types and Immaculate pure functions to more closely resemble the category of sets and partial functions, thereby facilitating mathematical analysis.
         </p>
         <p>
-            Nowadays the norm in programming language design is to give each variable lexical scope, meaning that the variable is visible to functions defined in the same block and in all child blocks. The problem with this design is that it spreads long-range functional impurity across entire programs. For example, this means that a function defined in one scope can potentially effect the variables in that scope regardless of where it's called. This is the very opposite of the clean, controlled and encapsulated design that Immaculate is going for. To avoid this problem, Immaculate rejects the current trend in programming language design, and instead gives all variables a completely dynamic scope that is entirely determined by the 'context' in which that function is called. This will probably raise eyebrows amongst seasoned developers, but their critiques are objectively wrong. It's objectively true that dynamic variable scope promotes code substitutibility (described below), controls side-effects, greatly increases code-reuseability, and facilitates code analysis. Note that this is all a direct-consequence of the existence of a straightforward category-theoretic semantics for dynamic variable scope.
+            Immaculate has no keywords. Instead, functions can be given both runtime and build-time arguments. This 'two-factor' model ensures that functions in Immaculate are nearly as expressive as keywords in other, competing frameworks. The main difference, of course, is that competing frameworks are usually stuck with a fixed set of keywords, while in Immaculate you can effectively define your own keywords, albeit with some limits. For example, there is no way to write a 'return' function in Immaculate. The second dot point in the next paragraph clarifies why these limits exist somewhat.
         </p>
         <p>
-            There are no keywords in Immaculate. Instead, functions can be given both runtime and build-time arguments. This `two-factor' model ensures that functions in Immaculate are nearly as expressive as keywords in other, competing frameworks. The main difference, of course, is that competing frameworks are usually stuck with a fixed set of keywords, while in Immaculate you can effectively define your own keywords, albeit with some limits. The second dot point in the next paragraph clarifies these limits somewhat, and explains why they exist.
-        </p>
-        <p>
-            Immaculate enjoys the property of <em>bijective substitutionality</em>. This means two things:
+            We've mentioned a few times that code analysis is easier in Immaculate. One reason for this is that it enjoys the property of <em>bijective substitutionality</em>. This means two things:
             <ul>
                 <li>
                     Firstly, you can always take an instance of a function call in a block of code, and replace that call with the body of the function that's being called, and the new program will have exactly the same behaviour as the old program. This is called <em>forward substitutionality</em>, and has myriad theoretical and practical benefits.
                 </li>
                 <li>
-                    Secondly, you can always take a well-formed expression from within an Immaculate function, stick that expression inside a function, and simply call that function in the location where that code used to be. This is called <em>backward substitutionality</em>, and it's possible because certain control-flow patterns available in other languages are not available in Immaculate. For example, although Immaculate supports both selection and looping (both bounded and unbounded), it does not have a `return' function.
+                    Secondly, you can always take a well-formed expression from within an Immaculate function, stick that expression inside a function, and simply call that function in the location where that code used to be. This is called <em>backward substitutionality</em>, and it's possible because certain control-flow patterns available in other languages are not available in Immaculate. For example, although Immaculate supports both selection and looping (both bounded and unbounded), it does not have a 'return' function.
                 </li>
             </ul>
-        </p>
-        <p>
-            I/O in Immaculate is tightly controlled and fully encapsulated. The I/O calls a function is able to make are completely tracked within its type signature, and these calls always work by sending one or more requests to the parent context, which is free to handle these requests however it pleases. Like most of the features that make Immaculate special, this promotes code reuse and analysis, helps the builder produce more efficient and optimized code than would otherwise be possible, and supports secure programming practices.
-        </p>
-        <p>            
-            In general, I/O is the only way to get information out of non-terminating computatons in Immaculate. This means that all non-terminating pure functions in Immaculate are essentially the same, since they simply keep running unproductively until the executing context is paused or deallocated. Note that this is contrary to the current design of the Haskell programming language, in which monads and laziness allow non-terminating pure functions to nevertheless emit data that can be seen by the outside world. This design decision is based partly on a healthy respect for the principle of least astonishment, and partly on a desire for the category of Immaculate types and Immaculate pure functions to more closely resemble the category of sets and partial functions, thereby facilitating mathematical analysis.
         </p>
         <p>
             Mathematical proofs are first class citizens in Immaculate, and can be used to avoid the runtime costs associated with out-of-bounds checking. For example, if a developer uses a command that accesses list items by index, they must either provide a proof that these accesses are within the bounds of the list, or they must provide code to handle the event that such an access fails, while accepting the runtime cost of out-of-bounds checking.
@@ -58,6 +52,15 @@
         </p>
         <p>
             Mention OOP cautionism.
+        </p>
+        <p>
+            In the realm of modern programming language design, lexical scope is prevalent, confining variable visibility to the defining block and its sub-blocks. This standard approach, while providing structure, often inadvertently propagates functional impurities across extensive codebases. For instance, a function defined within a particular scope can influence variables within that scope irrespective of its invocation context, leading to widespread side effects and complexities that detract from clean, controlled, and encapsulated design principles described in the above paragraphs.
+        </p>
+        <p>
+            Immaculate challenges this norm by adopting a dynamic scoping model, in which variable scope is determined by the context in which a function is called, not where it is defined. This approach might initially surprise seasoned developers accustomed to lexical scoping. However, it's crucial to consider the distinct advantages that dynamic scoping brings to Immaculate. For example, it results in the property of bijective substitutability (see below), tightens control over side effects, boosts code reusability, and simplifies mathematical analysis. These benefits arise partly as a result of the straightforward category-theoretic semantics for dynamic variable scope, thereby providing a theoretically sound basis for this noteworthy departure from standard programming language design principles.
+        </p>
+        <p>            
+            While this shift in scoping strategy marks a departure from conventional practices, it aligns with Immaculate's goals of achieving a more modular, maintainable, and theoretically cohesive programming environment. We invite developers to explore this model further to understand how it can lead to more predictable and manageable code, contrary to initial perceptions.
         </p>
         <p>
             Mention that Immaculate is more than just a programming language. It's also a platform to help users store, search, version, backup, and share their data.
