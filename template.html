@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Programming Language</title>
+    <title>Immaculate Language Homepage</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -12,30 +12,90 @@
     </nav>
     <div id="content">
 
-        <h1>Overview</h1>
         <p>
-            Immaculate is a very-high-level language (VHLL) that's designed to address the biggest issues with that genre of language, both from the standpoint of the developer and from the standpoint of the end-user. The long-term goal is to complete with and ultimately displace competing very-high-level languages like Python, Java, Go, and maybe even JavaScript. To achieve this goal, the broader strategy is to:
+            <em>Please note that Immaculate does not currently exist as software that can be used and downloaded; it's currently just a dream. This website was created to help attract the necessary talent to begin making that dream a reality.</em>
+        </p>
+
+        <!-- INTRODUCTION -->
+        <h1>Introduction</h1>
+
+        <!-- Overview -->
+        <h2>Overview</h2>
+        <p>
+            Immaculate is a stack-oriented imperative programming in which all types appear immutable from the standpoint of the developer and end-user. Reference counting is used to prevent memory leaks by ensuring that unused memory is reclaimed; additionally, when the reference count of an object drops to exactly 1, that object is regarded as mutable `under the hood', allowing otherwise costly operations to be implemented more cheaply.
+        </p>
+        <p>
+            The language is strongly and statically-typed; this helps catch bugs early, to promote fast execution, and to assist with code analysis. It is also JIT-compiled; this helps to facilitate code use and reuse without the significant runtime cost of a fully interpreted architecture.
+        </p>
+        <p>
+            Nowadays the norm in programming language design is to give each variable lexical scope, meaning that the variable is visible to functions defined in the same block and in all child blocks. The problem with this design is that it spreads long-range functional impurity across entire programs. For example, this means that a function defined in one scope can potentially effect the variables in that scope regardless of where it's called. This is the very opposite of the clean, controlled and encapsulated design that Immaculate is going for. To avoid this problem, Immaculate rejects the current trend in programming language design, and instead gives all variables a completely dynamic scope that is entirely determined by the 'context' in which that function is called. This will probably raise eyebrows amongst seasoned developers, but their critiques are objectively wrong. It's objectively true that dynamic variable scope promotes code substitutibility (described below), controls side-effects, greatly increases code-reuseability, and facilitates code analysis. Note that this is all a direct-consequence of the existence of a straightforward category-theoretic semantics for dynamic variable scope.
+        </p>
+        <p>
+            There are no keywords in Immaculate. Instead, functions can be given both runtime and build-time arguments. This `two-factor' model ensures that functions in Immaculate are nearly as expressive as keywords in other, competing frameworks. The main difference, of course, is that competing frameworks are usually stuck with a fixed set of keywords, while in Immaculate you can effectively define your own keywords, albeit with some limits. The second dot point in the next paragraph clarifies these limits somewhat, and explains why they exist.
+        </p>
+        <p>
+            Immaculate enjoys the property of <em>bijective substitutionality</em>. This means two things:
+            <ul>
+                <li>
+                    Firstly, you can always take an instance of a function call in a block of code, and replace that call with the body of the function that's being called, and the new program will have exactly the same behaviour as the old program. This is called <em>forward substitutionality</em>, and has myriad theoretical and practical benefits.
+                </li>
+                <li>
+                    Secondly, you can always take a well-formed expression from within an Immaculate function, stick that expression inside a function, and simply call that function in the location where that code used to be. This is called <em>backward substitutionality</em>, and it's possible because certain control-flow patterns available in other languages are not available in Immaculate. For example, although Immaculate supports both selection and looping (both bounded and unbounded), it does not have a `return' function.
+                </li>
+            </ul>
+        </p>
+        <p>
+            I/O in Immaculate is tightly controlled and fully encapsulated. The I/O calls a function is able to make are completely tracked within its type signature, and these calls always work by sending one or more requests to the parent context, which is free to handle these requests however it pleases. Like most of the features that make Immaculate special, this promotes code reuse and analysis, helps the builder produce more efficient and optimized code than would otherwise be possible, and supports secure programming practices.
+        </p>
+        <p>            
+            In general, I/O is the only way to get information out of non-terminating computatons in Immaculate. This means that all non-terminating pure functions in Immaculate are essentially the same, since they simply keep running unproductively until the executing context is paused or deallocated. Note that this is contrary to the current design of the Haskell programming language, in which monads and laziness allow non-terminating pure functions to nevertheless emit data that can be seen by the outside world. This design decision is based partly on a healthy respect for the principle of least astonishment, and partly on a desire for the category of Immaculate types and Immaculate pure functions to more closely resemble the category of sets and partial functions, thereby facilitating mathematical analysis.
+        </p>
+        <p>
+            Mathematical proofs are first class citizens in Immaculate, and can be used to avoid the runtime costs associated with out-of-bounds checking. For example, if a developer uses a command that accesses list items by index, they must either provide a proof that these accesses are within the bounds of the list, or they must provide code to handle the event that such an access fails, while accepting the runtime cost of out-of-bounds checking.
+        </p>
+        <p>
+            Mention homoiconicity.
+        </p>
+        <p>
+            Mention OOP cautionism.
+        </p>
+        <p>
+            Mention that Immaculate is more than just a programming language. It's also a platform to help users store, search, version, backup, and share their data.
+        </p>
+
+        <!-- Goals and Strategy -->
+        <h2>Goals and Strategy</h2>
+        <p>
+            As should be clear from the previous subsection, Immaculate is a very-high-level language (VHLL) that's designed to address the biggest issues with that genre of language, both from the standpoint of the developer and from the standpoint of the end-user. The long-term goal is to compete with and ultimately displace currently-popular like Python, Java, Go, and maybe even JavaScript. To achieve this goal, the broader strategy is to:
             <li> Attract talented thinkers. </li>
-            <li> Display a healthy respect for the insights of pure mathematics. </li>
+            <li> Display a healthy respect for the core insights of pure mathematics. </li>
             <li> Do things at the right level of abstraction. </li>
             <li> Keep both the software developer and the end-user in mind at all times. </li>
             <li> Take our sweet time. </li>
         </p>
         <p>
-            <strong>By taking our time, we can better leverage the creativity and critical thinking skills of our contributors, innovate effectively, develop appropriate abstractions, and avoid the numerous mistakes of numerous competing frameworks.</strong>
-        </p>
-        <p>
-            Please note that Immaculate does not currently exist as software that can be used and downloaded; it's currently just a dream. This website was created to help attract the necessary talent to begin making that dream a reality.
+            By taking our time, we can better leverage the creativity and critical thinking skills of our contributors, innovate effectively, develop appropriate abstractions, and avoid the numerous mistakes of numerous competing platforms and frameworks.
         </p>
 
-        <!-- Introduction -->
-        <h2>Three-Pronged Design</h2>
+        <!-- Three Different Languages -->
+        <h2>Three Different Languages</h2>
         <p>
-            According to the current plan, Immaculate is actually three different languages. Software developers write <strong>human-readable Immaculate</strong>. When ready, they transpile this into <strong>group-level Immaculate</strong>, replacing function names with Blake3 identifiers to ensure that anyone within the target group can automatically download the functionality they need via a recursive process, facilitating easy install and P2P sharing within that group. The computer of the end-user then transpiles this into a lower-level language called <strong>executable Immaculate</strong>, which replaces the Blake3 identifiers with more efficient nonhash identifiers, chooses concrete implementations for vaguely-defined functions like 'sort_list', and makes use of mutable design patterns that are not available in either of the other two versions of the language. The computer of the end-user then runs the program under question by JIT-compiling executable Immaculate as needed.
+            According to the current plan, Immaculate is actually three different languages.
+            <ul>
+                <li>
+                    Software developers write <strong>human-readable Immaculate</strong>.
+                </li>
+                <li>
+                    When ready, they transpile this into <strong>group-level Immaculate</strong>, replacing function names with Blake3 identifiers to ensure that anyone within the target group can automatically download the functionality they need via a recursive process, facilitating easy install and P2P sharing within that group.
+                </li>
+                <li>
+                    The computer of the end-user then transpiles this into a lower-level language called <strong>actionable Immaculate</strong>, which replaces the aforementioned Blake3 identifiers with more efficient nonhash identifiers, chooses concrete implementations for vaguely-defined functions like 'sort_list', and makes use of mutable design patterns that are not available in either of the other two versions of the language. The computer of the end-user then runs the program under question by JIT-compiling actionable Immaculate as needed.
+                </li>
+            </ul>
         </p>
-        <p>Background information...</p>
-        <h2>Goals</h2>
-        <p>What the language aims to achieve...</p>
+
+        <h2>Examples</h2>
+        <h3>What the language aims to achieve...</h3>
 
         <!-- Syntax -->
         <h1>Syntax</h1>
