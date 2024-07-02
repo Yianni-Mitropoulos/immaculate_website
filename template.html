@@ -16,10 +16,10 @@
             <em>Please note that Immaculate does not currently exist as software that can be used and downloaded; it's currently just a dream. This website was created to help attract the necessary talent to begin making that dream a reality.</em>
         </p>
 
-        <!-- INTRODUCTION -->
+
+
         <h1>Introduction</h1>
 
-        <!-- Overview -->
         <h2>Overview</h2>
         <p>
             Immaculate is a stack-oriented imperative programming in which all types appear immutable from the standpoint of the developer and end-user. Reference counting is used to prevent memory leaks by ensuring that unused memory is reclaimed; additionally, when the reference count of an object drops to exactly 1, that object is regarded as mutable 'under the hood', allowing otherwise costly operations to be implemented more cheaply.
@@ -69,7 +69,6 @@
             Note that Immaculate is more than just a programming language. It's also a platform to help users store, search, version, backup, and share their data. To make a value persistent, the user might e.g. drag and drop it into their file system, or mark it as persistent, or something like that, with the details depending on the default GUI that's ultimately settled upon. Both algorithmic and user-generated tags help users find their data, and multiple values can be bundled together into a single 'file' whose values represent different versions of the same data. Such files can be made available across multiple different computers and even multiple users by paying the market price for this service. Meanwhile, users can generate income by supplying their bandwidth and disk space for use by other Immaculate machines.
         </p>
 
-        <!-- Goals and Strategy -->
         <h2>Goals and Strategy</h2>
         <p>
             As should be clear from the previous subsection, Immaculate is a very-high-level language (VHLL) that's designed to address the biggest issues with that genre of language, both from the standpoint of the developer and from the standpoint of the end-user. The long-term goal is to compete with and ultimately displace currently-popular like Python, Java, Go, and maybe even JavaScript. To achieve this goal, the broader strategy is to:
@@ -102,6 +101,8 @@
             </li>
         </ul>
 
+
+
         <h1>Code Examples</h1>
         <h2>Hello, world!</h2>
         <p>
@@ -114,13 +115,14 @@
         </p>
         <p>
             The above code examples say "Hello, world!" at build-time. To say "Hello, world!" at runtime, we need to write a program. This can be achieved using the <code>class</code> function, like so:
-            <pre><code># A simple "Hello, world!" program
+            <pre><code>
+# Construct a simple "Hello, world!" program
 class : $
   &#10;
-  # An initializer for the class
+  # Define an initializer for the class
   @-ini : $
     &#10;
-    # An I/O call performed at program initialization
+    # Perform an I/O call at program initialization
     @-println "Hello, world!"</code></pre>         
         </p>
     </div>
