@@ -105,6 +105,7 @@
 
 
         <h1>Code Examples</h1>
+
         <h2>Hello, world!</h2>
         <p>
             The following code constructs the string value "Hello, world!". The constructed value can be handed to the file system for saving, or passed as input to another program or function:
@@ -122,15 +123,96 @@
             The above code examples say "Hello, world!" at build-time. To say "Hello, world!" at runtime, we need to write a program. This can be achieved using the <code>class</code> function, like so:
             <pre>
                 # Construct a simple "Hello, world!" program
-                class : $
+                class : &
 
                     # Define an initializer for the class
-                    @-ini : $
+                    @-ini : &
 
                         # Perform an I/O call at program initialization
                         @-println "Hello, world!"
-            </pre>         
+            </pre>
+        <p>
+            The <code>&</code> operator above is basically textual substitution. Think of it as taking the indented block, reducing that block to a single line (placing brackets where needed), and then placing this
         </p>
+        <p>
+            Once the above script is run, it will produce a value of type <code>class</code>. The user can take that value and stick it into their file system if they wish. Later, they can use it to spawn processes, or share it with their friends. They can also publish the program by making it available to the P2P network and putting its Blake3 hash on their website.
+        </p>
+
+        <h2>Immaculate as a Calculator</h2>
+        <p>
+            Suppose our bank account contains $43,822, and we're expecting a monthly interest payment of $216 arrived. To figure out how much will be in the account, we can open a new console and type
+            <pre>
+                add 43,822 216
+            </pre>
+            Note that when the above script is executed, it does not give back a string. Rather, it gives back a value of type 'positive ordinary integer' (ordinary here means non-infinite); this type is denoted <code>poz</code>. This value's base-10 ASCII representation will be shown, as well as some further information, such as a prime factorization, etc. If we're not happy with the information we're being shown, we can simply change our default viewer for values of type <code>poz</code>.
+        </p>
+        <p>
+            If we instead care about the interest fraction for that month, we can instead write <code>div 216 43,822</code>, or simply leverage fraction literal notation and write <code>216/43,822</code>. In either case, the script constructs a value of type 'positive ordinary rational number', or <code>poq</code>. Obviously, the default viewer for <code>poq</code> values will give us a decimal expansion for this fraction, and allow us to obtain more decimal places at a click of a button. It can also offer other functionality; once again, I'd opine that prime-factorization is perhaps a reasonable example. In any event, defaults do not need to be adhered to.
+        </p>
+        <p>
+            Immaculate supports percentages. If we want to know what 7% of the amount in our account is, we can write:
+            <pre>
+                mul 7% 43,822
+            </pre>
+            If we assume 7% interest per annum, rounded down to the nearest dollar, and want to find out how much will be in the account after 10 years, we can write:
+            <pre>
+                ( rep 10 : floor mul 107% ) 43,822
+            </pre>
+            If we don't like brackets, we can break this up into two lines like so:
+            <pre>
+                43,822
+                rep 10 : floor mul 107%
+            </pre>
+        </p>
+        <p>
+            Maybe we get bored of finance and decide to compute ten-thousand factorial:
+            <pre>
+                fct 10,000
+            </pre>    
+            It's worth re-emphasizing that that the value we get back from the aforementioned script isn't a string, it's a <code>poz</code>. This means we don't have to view (or even construct) all the decimal digits just to hold it. Our chosen viewer for positive ordinary integers will show us whatever information it sees fit. Change viewer if you want. We can also copy ten-thousand factorial into a new terminal and continue doing computations with it. Once again, note that this does not require the computation of full base 10 representation as an ASCII string, which is quite helpful when very large numbers are involved.
+        </p>
+        <p>
+            And of course, any value can be copied into the file system at any time. When we do this, we don't have to choose a file format for it, since the Immaculate platform is responsible for choosing a format (and the way it does so is fully customizable). Arguably, this makes Immaculate the first-ever user-friendly calculator.
+        </p>
+
+        <h2>Functions and Libraries</h2>
+        <p>
+            Here's a difference of squares function:
+            <pre>
+                fnc : Put=> 1-2 soz
+                === : &
+                asn : X=> : Y=> : &
+                mul add X Y dif X Y
+            </pre>
+            The above script contains a variety of notations and functions not yet described, so let's go through it slowly.
+        </p>
+        <p>
+            Here's a library containing an implementation of factorial, and an implementation of the Fibonacci sequence:
+            <pre>
+                # Construct a library
+                lib : &
+
+                # Factorial
+                @-fnc : Key=> fct
+                ===== : Put=> 1-1 noz
+                ===== : &
+                asn : X=> : &
+                dec X : mul X fct : 1
+
+                # Fibonacci
+                @-fnc : Key=> fib
+                ===== : Put=> 1-1 noz
+                ===== : &
+                asn 0 : CurrVal=> : &
+                asn 1 : NextVal=> : &
+                rep : &
+                  mdf : CurrVal=> : add NextVal
+                  mdf : CurrVal=> : NextVal=> : swp
+                CurrVal
+            </pre>
+
+        </p>
+
     </div>
     <script src="js/script.js"></script>
 </body>
