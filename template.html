@@ -71,11 +71,13 @@
         <h2>Goals and Strategy</h2>
         <p>
             As should be clear from the previous subsection, Immaculate is a very-high-level language (VHLL) that's designed to address the biggest issues with that genre of language, both from the standpoint of the developer and from the standpoint of the end-user. The long-term goal is to compete with and ultimately displace currently-popular like Python, Java, Go, and maybe even JavaScript. To achieve this goal, the broader strategy is to:
-            <li> Attract talented thinkers. </li>
-            <li> Display a healthy respect for the core insights of pure mathematics. </li>
-            <li> Do things at the right level of abstraction. </li>
-            <li> Keep both the software developer and the end-user in mind at all times. </li>
-            <li> Take our sweet time. </li>
+            <ul>
+                <li> Attract talented thinkers. </li>
+                <li> Display a healthy respect for the core insights of pure mathematics. </li>
+                <li> Do things at the right level of abstraction. </li>
+                <li> Keep both the software developer and the end-user in mind at all times. </li>
+                <li> Take our sweet time. </li>
+            </ul>
         </p>
         <p>
             By taking our time, we can better leverage the creativity and critical thinking skills of our contributors, innovate effectively, develop appropriate abstractions, and avoid the numerous mistakes of numerous competing platforms and frameworks.
@@ -106,23 +108,28 @@
         <h2>Hello, world!</h2>
         <p>
             The following code constructs the string value "Hello, world!". The constructed value can be handed to the file system for saving, or passed as input to another program or function:
-            <pre><code>"Hello, world!"</code></pre>
+            <pre>
+                "Hello, world!"
+            </pre>
         </p>
         <p>
             In general, I/O calls are preceded by the <code>@-</code> pattern. Thus, if instead of returning the string directly, you instead wish to log that string (with a linebreak at the end), you would instead write:
-            <pre><code>@-println "Hello, world!"</code></pre>         
+            <pre>
+                @-println "Hello, world!"
+            </pre>         
         </p>
         <p>
             The above code examples say "Hello, world!" at build-time. To say "Hello, world!" at runtime, we need to write a program. This can be achieved using the <code>class</code> function, like so:
-            <pre><code>
-# Construct a simple "Hello, world!" program
-class : $
-  &#10;
-  # Define an initializer for the class
-  @-ini : $
-    &#10;
-    # Perform an I/O call at program initialization
-    @-println "Hello, world!"</code></pre>         
+            <pre>
+                # Construct a simple "Hello, world!" program
+                class : $
+
+                    # Define an initializer for the class
+                    @-ini : $
+
+                        # Perform an I/O call at program initialization
+                        @-println "Hello, world!"
+            </pre>         
         </p>
     </div>
     <script src="js/script.js"></script>
