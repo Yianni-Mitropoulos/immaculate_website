@@ -1,102 +1,153 @@
 :root {
     --background-color-light: #fff;
     --text-color-light: #333;
-    --background-color-dark: #333;
-    --text-color-dark: #fff;
+    --background-color-dark: #1a1a1a;
+    --text-color-dark: #ccc;
+    --navbar-background: #008577;
+    --sub-menu-background: #006747;  /* Distinctive green for submenu */
+    --sub-menu-background-dark: #333; /* Dark grey for dark theme submenu */
+    --code-background-light: #f5f5f5;
+    --code-background-dark: #333;
+    --link-color: white;
+    --hover-effect-color: #004d40; /* Darker shade for hover effect */
 }
 
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     background-color: var(--background-color-light);
     color: var(--text-color-light);
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 0;
+    padding-top: 50px; /* Offset for fixed navbar */
 }
 
-nav {
-    background: #008577;
-    color: white;
+nav#navbar {
+    background-color: var(--navbar-background);
+    color: var(--link-color);
     padding: 0;
     position: fixed;
-    width: 100%;
     top: 0;
+    width: 100%;
     z-index: 1000;
     display: flex;
-    align-items: stretch; /* Ensures buttons use full vertical space */
 }
 
 nav ul {
-    list-style: none;
-    margin: 0;
+    list-style-type: none;
     padding: 0;
+    margin: 0;
     display: flex;
-    height: 100%;
+    align-items: center;
+    padding-left: 20px; /* Padding on the left for alignment */
 }
 
 nav li {
-    display: flex;
-    align-items: center; /* Center items vertically */
+    position: relative;
     padding: 10px 20px;
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+/* Apply hover effect directly to li */
+nav li:hover {
+    background-color: var(--hover-effect-color);
 }
 
 nav a {
-    color: white;
     text-decoration: none;
-    display: block; /* Ensures the link uses the full height of the li */
+    color: inherit;
+    display: block;
 }
 
-#content {
-    margin-top: 15px;
-    padding: 20px;
-}
-
-.dark-theme {
-    --background-color-light: #333;
-    --text-color-light: #fff;
-}
-
+/* Submenu */
 .sub-menu {
-    display: none; /* Initially hide the sub-menu */
-    background: #007060;
+    display: none;
+    background-color: var(--sub-menu-background); /* Background for light theme */
     position: absolute;
     left: 0;
-    top: 100%;
-    width: 100%;
+    top: 100%; /* Positioned right below the navbar item */
+    white-space: nowrap; /* Prevents line breaks within submenu items */
+    padding: 0; /* Padding for submenu items */
 }
 
 nav li:hover .sub-menu {
-    display: block; /* Show sub-menu on hover */
+    display: block;
+    z-index: 1001;
 }
 
-code {
-    font-family: monospace; /* Ensures the font is suitable for code */
-    font-size: 1.2em;       /* Larger font size, relative to surrounding text */
+.sub-menu li {
+    display: block;
+}
+
+.sub-menu a {
+    padding: 10px 20px;
+    display: block; /* Ensures that each link uses the full available space */
+}
+
+#content {
+    padding: 20px;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1, h2 {
+    color: #005555;
 }
 
 pre {
+    background-color: var(--code-background-light);
+    padding: 15px;
+    padding-left: 5em; /* Space for line numbers */
+    border-radius: 5px;
+    overflow: auto;
+    white-space: pre-wrap;
     position: relative;
-    padding-left: 4em; /* Adjusted to provide adequate space for line numbers */
     counter-reset: line-numbering;
-    background-color: var(--background-color-light);
-    color: var(--text-color-light);
-    overflow-x: auto;
+}
+
+code {
+    font-family: 'Courier New', monospace;
 }
 
 pre code {
     display: block;
-    white-space: pre-wrap;
+    line-height: 1.4;
 }
 
-pre code::before {
-    content: counter(line-numbering);
+pre code .line {
     counter-increment: line-numbering;
+    position: relative;
+    padding-left: 15px;
+}
+
+pre code .line::before {
+    content: counter(line-numbering);
     position: absolute;
-    left: 0;
+    left: -4em;
+    width: 3em;
     text-align: right;
-    width: 3em; /* Width of the numbering area */
-    padding-right: 10px; /* Space between numbers and code */
-    margin-left: -3.5em; /* Align numbers with the code block */
-    background-color: var(--background-color-dark); /* Background for numbers */
-    color: var(--text-color-dark); /* Color of text for numbers */
-    border-right: 1px solid var(--text-color-dark); /* Separator line */
+    color: var(--text-color-dark);
+    padding-right: 10px;
+}
+
+/* Dark theme specifics */
+body.dark-theme {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
+}
+
+body.dark-theme pre {
+    background-color: var(--code-background-dark);
+}
+
+body.dark-theme nav {
+    background-color: var(--background-color-dark);
+}
+
+body.dark-theme .sub-menu {
+    background-color: var(--sub-menu-background-dark); /* Dark grey for dark theme submenu */
+}
+
+body.dark-theme a {
+    color: var(--text-color-dark);
 }

@@ -12,3 +12,15 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.color = 'var(--text-color-light)';
     }
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    var pres = document.querySelectorAll('pre code');
+    pres.forEach(function(pre) {
+        var lines = pre.innerText.split('\n').filter(line => line.length > 0); // Avoid empty lines
+        var numberedHtml = '';
+        lines.forEach(function(line, index) {
+            numberedHtml += '<span class="line">' + line + '</span>\n';
+        });
+        pre.innerHTML = numberedHtml;
+    });
+});
