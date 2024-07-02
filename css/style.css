@@ -47,7 +47,6 @@ nav li {
     transition: background-color 0.3s ease; /* Smooth transition for background color */
 }
 
-/* Apply hover effect directly to li */
 nav li:hover {
     background-color: var(--hover-effect-color);
 }
@@ -66,7 +65,7 @@ nav a {
     left: 0;
     top: 100%; /* Positioned right below the navbar item */
     white-space: nowrap; /* Prevents line breaks within submenu items */
-    padding: 0; /* Padding for submenu items */
+    padding: 0; /* Remove padding */
 }
 
 nav li:hover .sub-menu {
@@ -76,10 +75,11 @@ nav li:hover .sub-menu {
 
 .sub-menu li {
     display: block;
+    padding: 10px 20px; /* Consistent padding with main menu items */
 }
 
 .sub-menu a {
-    padding: 10px 20px;
+    padding: 0; /* Remove additional padding from links */
     display: block; /* Ensures that each link uses the full available space */
 }
 
