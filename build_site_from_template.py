@@ -61,7 +61,7 @@ def main():
     final_content = replace_navbar_placeholder(template_content, navbar_html)
     # Write the final HTML content to file
     write_html_content(output_path, final_content)
-    print("Navbar has been built and HTML file is updated.")
+    print("index.html built.")
 
 if __name__ == "__main__":
     main()
