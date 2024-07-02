@@ -12,7 +12,7 @@
     </nav>
     <div id="content">
         <p>
-            <em>Please note that Immaculate does not currently exist as software that can be used and downloaded; it's currently just a dream. This website was created to help attract the necessary talent to begin making that dream a reality.</em>
+            <em>Please note that Immaculate is currently just a dream. It does not yet exist as software that can be used and downloaded. This website was created to help attract the necessary talent to begin making that dream a reality, but this is a big project. Please do not put off your next software project in the hope that Immaculate will come to fruition in the next few months.</em>
         </p>
 
 
@@ -24,9 +24,9 @@
             Immaculate is a stack-oriented imperative programming in which all types appear immutable from the standpoint of the developer and end-user. Reference counting is used to prevent memory leaks by ensuring that unused memory is reclaimed; additionally, when the reference count of an object drops to exactly 1, that object is regarded as mutable 'under the hood', allowing otherwise costly operations to be implemented more cheaply.
         </p>
         <p>
-            The language is strongly and statically-typed; this helps catch bugs early, to promote fast execution, and to assist with code analysis. It is also JIT-compiled; this helps to facilitate code use and reuse without the significant runtime cost of a fully interpreted architecture. Additionally, note that I/O in Immaculate is tightly controlled and fully encapsulated. The I/O calls a function is able to make are completely tracked within its type signature, and these calls always work by sending one or more requests to the parent context, which is free to handle these requests however it pleases. Like most of the features that make Immaculate special, this promotes code reuse and analysis, helps the builder produce more efficient and optimized code than would otherwise be possible, and supports secure programming practices.
+            The language is strongly and statically-typed; this helps catch bugs early, to promote fast execution, and to assist with code analysis. It is also JIT-compiled; this helps to facilitate code use and reuse without the significant runtime cost of a fully interpreted architecture. Additionally, note that I/O in Immaculate is tightly controlled and fully encapsulated. The I/O calls a function is able to make are completely tracked within its type signature, and these calls always work by sending one or more requests to the parent context, which is free to handle these requests however it pleases. Like most of the features that make Immaculate special, this promotes code reuse and analysis, helps the build process produce more efficient and optimized code than would otherwise be possible, and supports secure programming practices.
         </p>
-        <p>            
+        <p>
             Furthermore, I/O is the only way to get information out of non-terminating computatons in Immaculate. This means that all non-terminating pure functions in Immaculate are essentially the same, since they simply keep running unproductively until the executing context is paused or deallocated. Note that this is contrary to the current design of the Haskell programming language, in which monads and laziness allow non-terminating pure functions to nevertheless emit data that can be seen by the outside world. This design decision is based partly on a healthy respect for the principle of least astonishment, and partly on a desire for the category of Immaculate types and Immaculate pure functions to more closely resemble the category of sets and partial functions, thereby facilitating mathematical analysis.
         </p>
         <p>
