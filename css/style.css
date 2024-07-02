@@ -67,3 +67,36 @@ nav a {
 nav li:hover .sub-menu {
     display: block; /* Show sub-menu on hover */
 }
+
+code {
+    font-family: monospace; /* Ensures the font is suitable for code */
+    font-size: 1.2em;       /* Larger font size, relative to surrounding text */
+}
+
+pre {
+    position: relative;
+    padding-left: 4em; /* Adjusted to provide adequate space for line numbers */
+    counter-reset: line-numbering;
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+    overflow-x: auto;
+}
+
+pre code {
+    display: block;
+    white-space: pre-wrap;
+}
+
+pre code::before {
+    content: counter(line-numbering);
+    counter-increment: line-numbering;
+    position: absolute;
+    left: 0;
+    text-align: right;
+    width: 3em; /* Width of the numbering area */
+    padding-right: 10px; /* Space between numbers and code */
+    margin-left: -3.5em; /* Align numbers with the code block */
+    background-color: var(--background-color-dark); /* Background for numbers */
+    color: var(--text-color-dark); /* Color of text for numbers */
+    border-right: 1px solid var(--text-color-dark); /* Separator line */
+}

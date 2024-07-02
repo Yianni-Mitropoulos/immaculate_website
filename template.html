@@ -45,13 +45,13 @@
             </ul>
         </p>
         <p>
-            Mathematical proofs are first class citizens in Immaculate, and can be used to avoid the runtime costs associated with out-of-bounds checking. For example, if a developer uses a command that accesses list items by index, they must either provide a proof that these accesses are within the bounds of the list, or they must provide code to handle the event that such an access fails, while accepting the runtime cost of out-of-bounds checking.
+            Mathematical proofs are first class citizens in Immaculate, and can be used to avoid the runtime costs associated with out-of-bounds checking. For example, if a developer uses a command that accesses a list by index, they must either provide a proof that this access attempt will within the bounds of the list, or else they must provide code to handle the event that such an access fails, while accepting the runtime cost of out-of-bounds checking.
         </p>
         <p>
-            Mention homoiconicity.
+            Some Immaculate values carry a pointer to a dictionary that can be used to store past computations associated with that value. For example, functions can cache past computations, while large integers can cache prime factorizations. This makes apparently naive design patterns much more efficient, and simplifies the process of efficient code design.
         </p>
         <p>
-            Mention OOP cautionism.
+            A language is <em>homoiconic</em> if a program written in that language can be straightforwardly manipulated as data using the language. Immaculate is designed to be as homoiconic as possible. This means that Immaculate functions are implemented as Immaculate lists of Immaculate commands. To promote efficiency, the needed JIT-compilation information attached to that list's cache, ensuring that the machine code does not have to be constructed anew each time.
         </p>
         <p>
             In the realm of modern programming language design, lexical scope is prevalent, confining variable visibility to the defining block and its sub-blocks. This standard approach, while providing structure, often inadvertently propagates functional impurities across extensive codebases. For instance, a function defined within a particular scope can influence variables within that scope irrespective of its invocation context, leading to widespread side effects and complexities that detract from clean, controlled, and encapsulated design principles described in the above paragraphs.
@@ -63,7 +63,10 @@
             While this shift in scoping strategy marks a departure from conventional practices, it aligns with Immaculate's goals of achieving a more modular, maintainable, and theoretically cohesive programming environment. We invite developers to explore this model further to understand how it can lead to more predictable and manageable code, contrary to initial perceptions.
         </p>
         <p>
-            Mention that Immaculate is more than just a programming language. It's also a platform to help users store, search, version, backup, and share their data.
+            Every Immaculate value can be stored to disk, with the specific storage strategy controlled by the platform. For example, values of type 'img' can be stored, with the platform being configurable to use PNG, WEBP, or some combination of the two. In a similar way, many (but not all) values can be shared to untrusting third-parties, with the format used for transmission negotiated by the relevant computers.
+        </p>
+        <p>
+            Note that Immaculate is more than just a programming language. It's also a platform to help users store, search, version, backup, and share their data. To make a value persistent, the user might e.g. drag and drop it into their file system, or mark it as persistent, or something like that, with the details depending on the default GUI that's ultimately settled upon. Both algorithmic and user-generated tags help users find their data, and multiple values can be bundled together into a single 'file' whose values represent different versions of the same data. Such files can be made available across multiple different computers and even multiple users by paying the market price for this service. Meanwhile, users can generate income by supplying their bandwidth and disk space for use by other Immaculate machines.
         </p>
 
         <!-- Goals and Strategy -->
@@ -80,24 +83,44 @@
             By taking our time, we can better leverage the creativity and critical thinking skills of our contributors, innovate effectively, develop appropriate abstractions, and avoid the numerous mistakes of numerous competing platforms and frameworks.
         </p>
 
-        <!-- Three Different Languages -->
-        <h2>Three Different Languages</h2>
+        <h2>3+1 Different Languages</h2>
         <p>
-            According to the current plan, Immaculate is actually three different languages.
-            <ul>
-                <li>
-                    Software developers write <strong>human-readable Immaculate</strong>.
-                </li>
-                <li>
-                    When ready, they transpile this into <strong>group-level Immaculate</strong>, replacing function names with Blake3 identifiers to ensure that anyone within the target group can automatically download the functionality they need via a recursive process, facilitating easy install and P2P sharing within that group.
-                </li>
-                <li>
-                    The computer of the end-user then transpiles this into a lower-level language called <strong>actionable Immaculate</strong>, which replaces the aforementioned Blake3 identifiers with more efficient nonhash identifiers, chooses concrete implementations for vaguely-defined functions like 'sort_list', and makes use of mutable design patterns that are not available in either of the other two versions of the language. The computer of the end-user then runs the program under question by JIT-compiling actionable Immaculate as needed.
-                </li>
-            </ul>
+            Immaculate encompasses three distinct layers of language, the last of which is Just-In-Time (JIT) compiled to machine code. Taken together, these four languages represent the full gamut of the intended development and deployment pipeline.
+        </p>
+        <ul>
+            <li>
+                <strong>Human-readable Immaculate:</strong> This is the high-level language that developers write. It includes abstract constructs like 'dictionary' and 'insert key-value pair'. Additionally, it can incorporate non-string embedded values, such as images, referenced by their local object IDs.
+            </li>
+            <li>
+                <strong>Shareable Immaculate:</strong> When developers are ready to distribute their code, they convert it into this shareable format. Here, function names are transformed into Blake3 hash identifiers based on their definitions, and non-string values are also hashed. This hashed version facilitates secure peer-to-peer (P2P) sharing and verification, ensuring integrity and authenticity across distributed networks. Note that this level of code is still abstract, and deals with e.g. the general concept of a 'dictionary', as opposed to a concrete implementation via a specific hash table design.
+            </li>
+            <li>
+                <strong>Actionable Immaculate:</strong> At the user's end, Shareable Immaculate is further compiled into Actionable Immaculate. This version replaces Blake3 hashes with local identifiers, fetches necessary dependencies, and selects specific implementations for abstract concepts mentioned in the human-readable version. It leverages mutable design patterns which are not possible in the earlier stages, thereby optimizing resource utilization.
+            </li>
+            <li>
+                <strong>Machine Code:</strong> Finally, the actionable code is JIT-compiled into machine code as needed, which is executed by the user's computer. This final transformation allows the Immaculate program to run with an efficiency not too far below what might be achieved using a lower-level language like C or assembly.
+            </li>
+        </ul>
+
+        <h1>Code Examples</h1>
+        <h2>Hello, world!</h2>
+        <p>
+            The following code returns "Hello, world!" as a string value that can be handed to the file system for saving, or passed as input to another program or function:
+            <pre><code>"Hello, world!"</code></pre>
+        </p>
+        <p>
+            If instead of returning the value directly, you instead wish to simply log it, you would instead write:
+            <pre>
+                <code>@-println "Hello, world!"</code>
+                <code>lol yes</code>
+            </pre>
+            <pre><code>function exampleFunction() {
+                console.log('Hello, world!');
+                // More code here
+            }
+            </code></pre>            
         </p>
 
-        <h2>Examples</h2>
         <h3>What the language aims to achieve...</h3>
 
         <!-- Syntax -->
