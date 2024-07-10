@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Immaculate Language Homepage</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/webframes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <nav id="navbar">
@@ -27,7 +29,7 @@
             The language is strongly and statically-typed; this helps catch bugs early, to promote fast execution, and to assist with code analysis. It is also JIT-compiled; this helps to facilitate code use and reuse without the significant runtime cost of a fully interpreted architecture. Additionally, note that I/O in Immaculate is tightly controlled and fully encapsulated. The I/O calls a function is able to make are completely tracked within its type signature, and these calls always work by sending one or more requests to the parent context, which is free to handle these requests however it pleases. Like most of the features that make Immaculate special, this promotes code reuse and analysis, helps the build process produce more efficient and optimized code than would otherwise be possible, and supports secure programming practices.
         </p>
         <p>
-            Furthermore, I/O is the only way to get information out of non-terminating computatons in Immaculate. This means that all non-terminating pure functions in Immaculate are essentially the same, since they simply keep running unproductively until the executing context is paused or deallocated. Note that this is contrary to the current design of the Haskell programming language, in which monads and laziness allow non-terminating pure functions to nevertheless emit data that can be seen by the outside world. This design decision is based partly on a healthy respect for the principle of least astonishment, and partly on a desire for the category of Immaculate types and Immaculate pure functions to more closely resemble the category of sets and partial functions, thereby facilitating mathematical analysis.
+            Furthermore, I/O is the only way to get information out of non-terminating computatons in Immaculate. This means that all non-terminating pure functions in Immaculate are essentially the same, since they simply keep running unproductively until the executing context is paused or deallocated. Note that this is contrary to how languages like Haskell work. Note that in Haskell, monads and laziness are cleverly combined to allow non-terminating pure functions to nevertheless emit data that can be seen by the outside world. The decision not to go down this path in Immaculate is based partly on a healthy respect for the principle of least astonishment. It also based partly on mathematical considerations; namely, there is a background desire for the category of Immaculate types and Immaculate pure functions to closely resemble the category of sets and partial functions. The hope is that this ultimately facilitates code analysis.
         </p>
         <p>
             Immaculate has no keywords. Instead, functions can be given both runtime and build-time arguments. This 'two-factor' model ensures that functions in Immaculate are nearly as expressive as keywords in other, competing frameworks. The main difference, of course, is that competing frameworks are usually stuck with a fixed set of keywords, while in Immaculate you can effectively define your own keywords, albeit with some limits. For example, there is no way to write a 'return' function in Immaculate. The second dot point in the next paragraph clarifies why these limits exist somewhat.
@@ -95,7 +97,7 @@
                 <strong>Shareable Immaculate:</strong> When developers are ready to distribute their code, they convert it into this shareable format. Here, function names are transformed into Blake3 hash identifiers based on their definitions, and non-string values are also hashed. This hashed version facilitates secure peer-to-peer (P2P) sharing and verification, ensuring integrity and authenticity across distributed networks. Note that this level of code is still abstract, and deals with e.g. the general concept of a 'dictionary', as opposed to a concrete implementation via a specific hash table design.
             </li>
             <li>
-                <strong>Actionable Immaculate:</strong> At the user's end, Shareable Immaculate is further compiled into Actionable Immaculate. This version replaces Blake3 hashes with local identifiers, fetches necessary dependencies, and selects specific implementations for abstract concepts mentioned in the human-readable version. It leverages mutable design patterns which are not possible in the earlier stages, thereby optimizing resource utilization.
+                <strong>Actionable Immaculate:</strong> At the user's end, Shareable Immaculate is further compiled into Actionable Immaculate. This version replaces Blake3 hashes with more efficient locally-managed identifiers, fetches necessary dependencies, and selects specific implementations for abstract concepts mentioned in the human-readable version. It also leverages mutable design patterns which are not possible in the earlier stages, thereby improving resource utilization.
             </li>
             <li>
                 <strong>Machine Code:</strong> Finally, the actionable code is JIT-compiled into machine code as needed, which is executed by the user's computer. This final transformation allows the Immaculate program to run with an efficiency not too far below what might be achieved using a lower-level language like C or assembly.
@@ -104,8 +106,22 @@
 
 
 
-        <h1>Code Examples</h1>
+        <h1>Memory Management</h1>
+        <div class="animation">
+            <div name="Content 1">
+                This is my first bit of content.
+            </div>
+            <div name="Content 2">
+                Here's some more content.
+            </div>
+            <div name="Content 3">
+                And here's a third content area.
+            </div>
+        </div>
+        
 
+
+        <h1>Code Examples</h1>
         <h2>Hello, world!</h2>
         <p>
             The following code constructs the string value "Hello, world!". The constructed value can be handed to the file system for saving, or passed as input to another program or function:
@@ -215,5 +231,6 @@
 
     </div>
     <script src="js/script.js"></script>
+    <script src="js/webframes.js"></script>
 </body>
 </html>
