@@ -139,16 +139,16 @@
             The above code examples say "Hello, world!" at build-time. To say "Hello, world!" at runtime, we need to write a program. This can be achieved using the <code>class</code> function, like so:
             <pre>
                 # Construct a simple "Hello, world!" program
-                class : &
+                class : $
 
                     # Define an initializer for the class
-                    @-ini : &
+                    @-ini : $
 
                         # Perform an I/O call at program initialization
                         @-println "Hello, world!"
             </pre>
         <p>
-            The <code>&</code> operator above is basically textual substitution. Think of it as taking the indented block, reducing that block to a single line (placing brackets where needed), and then placing this
+            The <code>$</code> operator above is basically textual substitution. Think of it as taking the indented block, reducing that block to a single line (placing brackets where needed), and then placing this
         </p>
         <p>
             Once the above script is run, it will produce a value of type <code>class</code>. The user can take that value and stick it into their file system if they wish. Later, they can use it to spawn processes, or share it with their friends. They can also publish the program by making it available to the P2P network and putting its Blake3 hash on their website.
@@ -156,7 +156,7 @@
 
         <h2>Immaculate as a Calculator</h2>
         <p>
-            Suppose our bank account contains $43,822, and we're expecting a monthly interest payment of $216 arrived. To figure out how much will be in the account, we can open a new console and type
+            Suppose our bank account contains $43,822. If we're expecting a monthly interest payment of $216 to arrive, how much will be in the account? To figure this out, we can open a new console and type
             <pre>
                 add 43,822 216
             </pre>
@@ -191,40 +191,62 @@
             And of course, any value can be copied into the file system at any time. When we do this, we don't have to choose a file format for it, since the Immaculate platform is responsible for choosing a format (and the way it does so is fully customizable). Arguably, this makes Immaculate the first-ever user-friendly calculator.
         </p>
 
+        <h2>Type Signatures and Transformative Integers</h2>
+        <p>
+            Consider a function that gets two signed integers from the main stack, and does some computations, and then puts a signed integer back. A long-winded way of creating a type signature for such a function is:
+            <pre>
+                : Get=> soz
+                : Get=> soz
+                : Put=> soz
+            </pre>
+            However, this is a bit repetitious; to save space, we can simply write:
+            <pre>
+                : Get=> 2 soz
+                : Put=> soz
+            </pre>
+            Even more simply, we can write:
+            <pre>
+                : Put=> 1-2 soz
+            </pre>
+            Technically <code>1-2</code> is a <em>transformative ordinary integer</em> or <code>toz</code>. Transformative integers are a bit like signed integers, but don't simplify down quite as readily. For example, <code>1-2</code> does not automatically simplify to <code>-1</code>. The intended semantics of transformative integers is that they count stack operations. Let's spend a moment delving into the formalities.
+        </p>
+
         <h2>Functions and Libraries</h2>
         <p>
             Here's a difference of squares function:
             <pre>
-                fnc : Put=> 1-2 soz
-                === : &
-                asn : X=> : Y=> : &
+                fnc "Difference of Squares"
+                : Put=> 1-2 soz
+                : Bod=> $
+                asn : X=> : Y=> : $
                 mul add X Y dif X Y
             </pre>
-            The above script contains a variety of notations and functions not yet described, so let's go through it slowly.
+            The above script contains a variety of notations and functions not yet described, so let's go through it slowly. The first line begins by pushing the string "Difference of Squares" onto the main stack, after which we call the function <code>fnc</code>, which will take that string and construct a new function for us. To do this, it needs to be given some more information, and this additional information is provided at build-time in the form of Immaculate expressions. The first of these expressions is called <code>Put=></code>, which is one of the main kargs used to describe the type signature of a function. Note that this particular function accepts two values of type <code>soz</code>, and returns a third. As we saw in the previous section, this general shape can be summarized by the transformative integer 1-2.
         </p>
         <p>
             Here's a library containing an implementation of factorial, and an implementation of the Fibonacci sequence:
             <pre>
-                # Construct a library
-                lib : &
+                lib "My Library" : $
 
                 # Factorial
-                @-fnc : Key=> fct
-                ===== : Put=> 1-1 noz
-                ===== : &
-                asn : X=> : &
-                dec X : mul X fct : 1
+                @-put : fct=> $
+                    fnc "Factorial"
+                    : Put=> 1-1 noz
+                    : Bod=> $
+                    asn : X=> : $
+                    dec X : mul X fct : 1
 
                 # Fibonacci
-                @-fnc : Key=> fib
-                ===== : Put=> 1-1 noz
-                ===== : &
-                asn 0 : CurrVal=> : &
-                asn 1 : NextVal=> : &
-                rep : &
-                  mdf : CurrVal=> : add NextVal
-                  mdf : CurrVal=> : NextVal=> : swp
-                CurrVal
+                @-put : fib=> $
+                    fnc "Fibonacci Sequence"
+                    : Put=> 1-1 noz
+                    : Bod=> $
+                    asn 0 : CurrVal=> : $
+                    asn 1 : NextVal=> : $
+                    rep : $
+                        mdf : CurrVal=> : add NextVal
+                        mdf : CurrVal=> : NextVal=> : swp
+                    CurrVal
             </pre>
 
         </p>
