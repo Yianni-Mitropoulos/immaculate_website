@@ -6,6 +6,7 @@
     <title>Immaculate Language Homepage</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/webframes.css">
+    <link rel="stylesheet" href="css/memory_diagrams.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -14,7 +15,7 @@
     </nav>
     <div id="content">
         <p>
-            <em>Please note that Immaculate is currently just a dream. It does not yet exist as software that can be used and downloaded. This website was created to help attract the necessary talent to begin making that dream a reality, but this is a big project. Please do not put off your next software project in the hope that Immaculate will come to fruition in the next few months.</em>
+            <em>Please note that Immaculate is currently just a dream &#x2012; it does not yet exist as software that can be used and downloaded. This website was created to help attract the necessary talent to begin making that dream a reality, but this is a big project. Please do not put off your next software project in the hope that Immaculate will come to fruition in the next few months.</em>
         </p>
 
 
@@ -29,7 +30,7 @@
             The language is strongly and statically-typed; this helps catch bugs early, to promote fast execution, and to assist with code analysis. It is also JIT-compiled; this helps to facilitate code use and reuse without the significant runtime cost of a fully interpreted architecture. Additionally, note that I/O in Immaculate is tightly controlled and fully encapsulated. The I/O calls a function is able to make are completely tracked within its type signature, and these calls always work by sending one or more requests to the parent context, which is free to handle these requests however it pleases. Like most of the features that make Immaculate special, this promotes code reuse and analysis, helps the build process produce more efficient and optimized code than would otherwise be possible, and supports secure programming practices.
         </p>
         <p>
-            Furthermore, I/O is the only way to get information out of non-terminating computatons in Immaculate. This means that all non-terminating pure functions in Immaculate are essentially the same, since they simply keep running unproductively until the executing context is paused or deallocated. Note that this is contrary to how languages like Haskell work. Note that in Haskell, monads and laziness are cleverly combined to allow non-terminating pure functions to nevertheless emit data that can be seen by the outside world. The decision not to go down this path in Immaculate is based partly on a healthy respect for the principle of least astonishment. It also based partly on mathematical considerations; namely, there is a background desire for the category of Immaculate types and Immaculate pure functions to closely resemble the category of sets and partial functions. The hope is that this ultimately facilitates code analysis.
+            Furthermore, I/O is the only way to get information out of non-terminating computatons in Immaculate. This means that all non-terminating pure functions in Immaculate are essentially the same, since they simply keep running unproductively until the executing context is paused or deallocated. This is contrary to how certain pure-functional languages like Haskell work. (Note that in Haskell, monads and laziness are cleverly combined to allow non-terminating pure functions to nevertheless emit data that can be seen by the outside world.) The decision not to go down this path in the design of Immaculate is based partly on a healthy respect for the principle of least astonishment, since the ability of non-terminating pure functions to emit data is can be somewhat bewildering the first time it's encountered. This decision is also based partly on mathematical considerations; namely, we want the category of Immaculate types and Immaculate pure functions to closely resemble the category of sets and partial functions, in the hope that this ultimately facilitates code analysis.
         </p>
         <p>
             Immaculate has no keywords. Instead, functions can be given both runtime and build-time arguments. This 'two-factor' model ensures that functions in Immaculate are nearly as expressive as keywords in other, competing frameworks. The main difference, of course, is that competing frameworks are usually stuck with a fixed set of keywords, while in Immaculate you can effectively define your own keywords, albeit with some limits. For example, there is no way to write a 'return' function in Immaculate. The second dot point in the next paragraph clarifies why these limits exist somewhat.
@@ -108,14 +109,98 @@
 
         <h1>Memory Management</h1>
         <div class="animation">
-            <div name="Content 1">
-                This is my first bit of content.
+            <div name="Begin with &quot;Hello, world!&quot; as raw data">
+                <p>
+                    Representing the string "Hello, world!"
+                </p>
+                <div class="bytecluster">
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="qword-left">A</span>
+                            <span class="qword-right">Raw Data</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="qword-left">B</span>
+                            <span class="qword-right">Raw Data + Length</span>
+                        </div>
+                    </div>
+                    <bytes>
+                        'H'|'e'|'l'|'l'|'o'|','|'&nbsp;'|'w'|'o'|'r'|'l'|'d'|'!'|   |   |13
+                    </bytes>    
+                </div>
             </div>
-            <div name="Content 2">
-                Here's some more content.
+            <div name="Append a space">
+                <p>
+                    Representing the string "Hello, world!&nbsp;"
+                </p>
+                <div class="bytecluster">
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="qword-left">A</span>
+                            <span class="qword-right">Raw Data</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="qword-left">B</span>
+                            <span class="qword-right">Raw Data + Length</span>
+                        </div>
+                    </div>
+                    <bytes>
+                        'H'|'e'|'l'|'l'|'o'|','|'&nbsp;'|'w'|'o'|'r'|'l'|'d'|'!'|'&nbsp;'|   |14
+                    </bytes>    
+                </div>
             </div>
-            <div name="Content 3">
-                And here's a third content area.
+            <div name="Append a 'Y'">
+                <p>
+                    Representing the string "Hello, world!&nbsp;Y"
+                </p>
+                <div class="bytecluster">
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="qword-left">A</span>
+                            <span class="qword-right">Raw Data</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="qword-left">B</span>
+                            <span class="qword-right">Raw Data + Length</span>
+                        </div>
+                    </div>
+                    <bytes>
+                        'H'|'e'|'l'|'l'|'o'|','|'&nbsp;'|'w'|'o'|'r'|'l'|'d'|'!'|'&nbsp;'|'Y'|15
+                    </bytes>    
+                </div>
+            </div>
+            <div name="Append an 'o', switching to a reference">
+                <p>
+                    Representing the string "Hello, world!&nbsp;Yo"
+                </p>
+                <div class="bytecluster">
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="qword-left">A</span>
+                            <span class="qword-right">Loop Pointer + Length</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="qword-left">B</span>
+                            <span class="qword-right">Node Pointer + Flag Byte</span>
+                        </div>
+                    </div>
+                    <bytes>
+                        C|C|C|C|C|C|16| |C|C|C|C|C|C| |64
+                    </bytes>    
+                </div>
+                <p>
+                    An object in the heap:
+                </p>
+                <div class="bytecluster">
+                    <div class="byterow">
+                        <div class="qword">C (Prev)</div>
+                        <div class="qword">D (Next)</div>
+                    </div>
+                    <bytes>
+                        A|A|A|A|A|A| | | | | | | | | | 
+                    </bytes>    
+                </div>
+
             </div>
         </div>
         

@@ -83,16 +83,45 @@ def adjust_pre_blocks(content):
     # Reconstruct the content
     return '\n'.join(adjusted_lines)
 
+def process_bytes_tag(content):
+    # Define the pattern to find <bytes> tags
+    pattern = r'<bytes>(.*?)<\/bytes>'
+    matches = re.findall(pattern, content, re.DOTALL)
+    
+    for match in matches:
+        byte_values = match.split('|')
+        byte_html = '<div class="byterow">\n'
+        for value in byte_values:
+            byte_html += f'    <div class="byte">{value.strip()}</div>\n'
+        byte_html += '</div>'
+        
+        # Replace the original <bytes>...<\/bytes> with the constructed HTML
+        content = content.replace(f'<bytes>{match}</bytes>', byte_html)
+    
+    return content
+
 def main():
     template_path = 'template.html'
     output_path = 'index.html'
+    
+    # Read the original HTML content
     template_content = read_html_content(template_path)
+    
+    # Extract headings and generate a navbar
     structured_data = extract_and_assign_headings(template_content)
     navbar_html = generate_navbar_html(structured_data)
-    final_content = replace_navbar_placeholder(template_content, navbar_html)
-    final_content = adjust_pre_blocks(final_content)
-    write_html_content(output_path, final_content)
+    template_content = replace_navbar_placeholder(template_content, navbar_html)
+    
+    # Adjust <pre> blocks
+    template_content = adjust_pre_blocks(template_content)
+    
+    # Process <bytes> tags
+    template_content = process_bytes_tag(template_content)
+    
+    # Write the final HTML content to output file
+    write_html_content(output_path, template_content)
     print("index.html built.")
+
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,51 @@
+.bytecluster {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #333; /* Dark background for the diagram */
+}
+
+.byterow {
+    display: flex;
+    margin-bottom: 2px; /* Vertical gap between rows */
+}
+
+.qword {
+    width: calc(24px * 8 + 2px * 7); /* Calculated width to cover 8 bytes */
+    height: 20px;
+    border: 1px solid #888; /* Consistent border */
+    display: flex;
+    justify-content: space-between; /* Aligns children to the left and right */
+    align-items: center;
+    background-color: #444; /* Consistent background */
+    color: #fff; /* Text color */
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 2px;
+    padding: 0 7px; /* Padding for better text visibility */
+}
+
+.qword-left, .qword-right {
+    flex: 0 1 auto; /* Allows text to grow as needed, but starts at minimum content size */
+}
+
+.qword-right {
+    text-align: right; /* Aligns text to the right */
+}
+
+.byte {
+    width: 24px; /* Width of each byte */
+    height: 20px;
+    border: 1px solid #888; /* Consistent border for all elements */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2px;
+    background-color: #444; /* Consistent background for bytes */
+    color: #fff; /* Text color */
+    font-size: 12px;
+}
+
+.byte:last-child, .qword:last-child {
+    margin-right: 0; /* Remove margin on the last element to align end correctly */
+}
