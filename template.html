@@ -109,19 +109,20 @@
 
         <h1>Memory Management</h1>
         <div class="animation">
-            <div name="Begin with &quot;Hello, world!&quot; as raw data">
+
+            <div name="&quot;Hello, world!&quot; as a raw datum">
                 <p>
                     Representing the string "Hello, world!"
                 </p>
                 <div class="bytecluster">
                     <div class="byterow">
                         <div class="qword">
-                            <span class="qword-left">A</span>
-                            <span class="qword-right">Raw Data</span>                            
+                            <span class="word-left">A:</span>
+                            <span class="word-right">Raw Data</span>                            
                         </div>
                         <div class="qword">
-                            <span class="qword-left">B</span>
-                            <span class="qword-right">Raw Data + Length</span>
+                            <span class="word-left">B:</span>
+                            <span class="word-right">Raw Data + Length</span>
                         </div>
                     </div>
                     <bytes>
@@ -129,19 +130,20 @@
                     </bytes>    
                 </div>
             </div>
-            <div name="Append a space">
+
+            <div name="Append '&nbsp;'">
                 <p>
                     Representing the string "Hello, world!&nbsp;"
                 </p>
                 <div class="bytecluster">
                     <div class="byterow">
                         <div class="qword">
-                            <span class="qword-left">A</span>
-                            <span class="qword-right">Raw Data</span>                            
+                            <span class="word-left">A:</span>
+                            <span class="word-right">Raw Data</span>                            
                         </div>
                         <div class="qword">
-                            <span class="qword-left">B</span>
-                            <span class="qword-right">Raw Data + Length</span>
+                            <span class="word-left">B:</span>
+                            <span class="word-right">Raw Data + Length</span>
                         </div>
                     </div>
                     <bytes>
@@ -149,19 +151,20 @@
                     </bytes>    
                 </div>
             </div>
-            <div name="Append a 'Y'">
+
+            <div name="Append 'Y'">
                 <p>
                     Representing the string "Hello, world!&nbsp;Y"
                 </p>
                 <div class="bytecluster">
                     <div class="byterow">
                         <div class="qword">
-                            <span class="qword-left">A</span>
-                            <span class="qword-right">Raw Data</span>                            
+                            <span class="word-left">A:</span>
+                            <span class="word-right">Raw Data</span>                            
                         </div>
                         <div class="qword">
-                            <span class="qword-left">B</span>
-                            <span class="qword-right">Raw Data + Length</span>
+                            <span class="word-left">B:</span>
+                            <span class="word-right">Raw Data + Length</span>
                         </div>
                     </div>
                     <bytes>
@@ -169,19 +172,20 @@
                     </bytes>    
                 </div>
             </div>
-            <div name="Append an 'o', switching to a reference">
+
+            <div name="Append 'o' by making the datum into a ref">
                 <p>
                     Representing the string "Hello, world!&nbsp;Yo"
                 </p>
                 <div class="bytecluster">
                     <div class="byterow">
                         <div class="qword">
-                            <span class="qword-left">A</span>
-                            <span class="qword-right">Loop Pointer + Length</span>                            
+                            <span class="word-left">A:</span>
+                            <span class="word-right">Loop Pointer + Length</span>                            
                         </div>
                         <div class="qword">
-                            <span class="qword-left">B</span>
-                            <span class="qword-right">Node Pointer + Flag Byte</span>
+                            <span class="word-left">B:</span>
+                            <span class="word-right">Node Pointer + Flag Byte</span>
                         </div>
                     </div>
                     <bytes>
@@ -189,19 +193,298 @@
                     </bytes>    
                 </div>
                 <p>
-                    An object in the heap:
+                    An object in the heap that contains our data:
                 </p>
                 <div class="bytecluster">
                     <div class="byterow">
-                        <div class="qword">C (Prev)</div>
-                        <div class="qword">D (Next)</div>
+                        <div class="qword">
+                            <span class="word-left">C:</span>
+                            <span class="word-right">Metadata</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="word-left">D:</span>
+                            <span class="word-right">Metadata</span>
+                        </div>
                     </div>
                     <bytes>
-                        A|A|A|A|A|A| | | | | | | | | | 
+                        |||||||||||||||
+                    </bytes>
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="word-left">E:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="word-left">F:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                    </div>
+                    <bytes>
+                        'H'|'e'|'l'|'l'|'o'|','|'&nbsp;'|'w'|'o'|'r'|'l'|'d'|'!'|'&nbsp;'|'Y'|'o'
+                    </bytes>
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="word-left">G:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="word-left">H:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                    </div>
+                    <bytes>
+                        |||||||||||||||
+                    </bytes>
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="word-left">I:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="word-left">J:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                    </div>
+                    <bytes>
+                        |||||||||||||||
+                    </bytes>
+                </div>
+            </div>
+
+            <div name="Append 'u'">
+                <p>
+                    Representing the string "Hello, world!&nbsp;You"
+                </p>
+                <div class="bytecluster">
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="word-left">A:</span>
+                            <span class="word-right">Loop Pointer + Length</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="word-left">B:</span>
+                            <span class="word-right">Node Pointer + Flag Byte</span>
+                        </div>
+                    </div>
+                    <bytes>
+                        C|C|C|C|C|C|17| |C|C|C|C|C|C| |64
                     </bytes>    
                 </div>
-
+                <p>
+                    An object in the heap that contains our data:
+                </p>
+                <div class="bytecluster">
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="word-left">C:</span>
+                            <span class="word-right">Metadata</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="word-left">D:</span>
+                            <span class="word-right">Metadata</span>
+                        </div>
+                    </div>
+                    <bytes>
+                        |||||||||||||||
+                    </bytes>
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="word-left">E:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="word-left">F:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                    </div>
+                    <bytes>
+                        'H'|'e'|'l'|'l'|'o'|','|'&nbsp;'|'w'|'o'|'r'|'l'|'d'|'!'|'&nbsp;'|'Y'|'o'
+                    </bytes>
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="word-left">G:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="word-left">H:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                    </div>
+                    <bytes>
+                        'u'|||||||||||||||
+                    </bytes>
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="word-left">I:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="word-left">J:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                    </div>
+                    <bytes>
+                        |||||||||||||||
+                    </bytes>
+                </div>
             </div>
+
+            <div name="Append '&nbsp'">
+                <p>
+                    Representing the string "Hello, world!&nbsp;You&nbsp;"
+                </p>
+                <div class="bytecluster">
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="word-left">A:</span>
+                            <span class="word-right">Loop Pointer + Length</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="word-left">B:</span>
+                            <span class="word-right">Node Pointer + Flag Byte</span>
+                        </div>
+                    </div>
+                    <bytes>
+                        C|C|C|C|C|C|18| |C|C|C|C|C|C| |64
+                    </bytes>    
+                </div>
+                <p>
+                    An object in the heap that contains our data:
+                </p>
+                <div class="bytecluster">
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="word-left">C:</span>
+                            <span class="word-right">Metadata</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="word-left">D:</span>
+                            <span class="word-right">Metadata</span>
+                        </div>
+                    </div>
+                    <bytes>
+                        |||||||||||||||
+                    </bytes>
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="word-left">E:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="word-left">F:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                    </div>
+                    <bytes>
+                        'H'|'e'|'l'|'l'|'o'|','|'&nbsp;'|'w'|'o'|'r'|'l'|'d'|'!'|'&nbsp;'|'Y'|'o'
+                    </bytes>
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="word-left">G:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="word-left">H:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                    </div>
+                    <bytes>
+                        'u'|'&nbsp'||||||||||||||
+                    </bytes>
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="word-left">I:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="word-left">J:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                    </div>
+                    <bytes>
+                        |||||||||||||||
+                    </bytes>
+                </div>
+            </div>
+
+            <div name="Append 'R'">
+                <p>
+                    Representing the string "Hello, world!&nbsp;You&nbsp;R"
+                </p>
+                <div class="bytecluster">
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="word-left">A:</span>
+                            <span class="word-right">Loop Pointer + Length</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="word-left">B:</span>
+                            <span class="word-right">Node Pointer + Flag Byte</span>
+                        </div>
+                    </div>
+                    <bytes>
+                        C|C|C|C|C|C|19| |C|C|C|C|C|C| |64
+                    </bytes>    
+                </div>
+                <p>
+                    An object in the heap that contains our data:
+                </p>
+                <div class="bytecluster">
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="word-left">C:</span>
+                            <span class="word-right">Metadata</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="word-left">D:</span>
+                            <span class="word-right">Metadata</span>
+                        </div>
+                    </div>
+                    <bytes>
+                        |||||||||||||||
+                    </bytes>
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="word-left">E:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="word-left">F:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                    </div>
+                    <bytes>
+                        'H'|'e'|'l'|'l'|'o'|','|'&nbsp;'|'w'|'o'|'r'|'l'|'d'|'!'|'&nbsp;'|'Y'|'o'
+                    </bytes>
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="word-left">G:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="word-left">H:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                    </div>
+                    <bytes>
+                        'u'|'&nbsp'|'R'|||||||||||||
+                    </bytes>
+                    <div class="byterow">
+                        <div class="qword">
+                            <span class="word-left">I:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                        <div class="qword">
+                            <span class="word-left">J:</span>
+                            <span class="word-right">Payload</span>                            
+                        </div>
+                    </div>
+                    <bytes>
+                        |||||||||||||||
+                    </bytes>
+                </div>
+            </div>
+
         </div>
         
 
